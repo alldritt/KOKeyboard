@@ -37,6 +37,7 @@
 @interface KOKeyboardRow : UIView
 
 + (void)applyToTextView:(UITextView *)textView;
++ (void)applyToTextView:(UITextView *)textView keys:(NSString*) keys;
 - (void)trackPointMovedX:(int)xdiff Y:(int)ydiff selecting:(BOOL)selecting;
 - (void)trackPointStarted;
 

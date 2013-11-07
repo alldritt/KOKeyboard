@@ -34,6 +34,7 @@
 
 #import "KOKeyboardRow.h"
 #import "KOSwipeButton.h"
+#import "CreateButton.h"
 
 @interface KOKeyboardRow ()
 
@@ -46,35 +47,53 @@
 
 @synthesize textView, startLocation;
 
-+ (void)applyToTextView:(UITextView *)t
++ (void)applyToTextView:(UITextView *)t {
+    NSString *keys = @"TTTTT()\"[]{}'<>\\/$´`~^|€£◉◉◉◉◉-+=%*!?#@&_:;,.1203467589";
+    
+    [KOKeyboardRow applyToTextView:t keys:keys];
+}
+
++ (void)applyToTextView:(UITextView *)t keys:(NSString*) keys
 {
     int barHeight = 72;
     int barWidth = 768;
-    
-    KOKeyboardRow *v = [[KOKeyboardRow alloc] initWithFrame:CGRectMake(0, 0, barWidth, barHeight)];
-    v.backgroundColor = [UIColor colorWithRed:156/255. green:155/255. blue:166/255. alpha:1.];
-    v.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    v.textView = t;
-    
-    UIView *border1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barWidth, 1)];
-    border1.backgroundColor = [UIColor colorWithRed:51/255. green:51/255. blue:51/255. alpha:1.];
-    border1.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [v addSubview:border1];
-    
-    UIView *border2 = [[UIView alloc] initWithFrame:CGRectMake(0, 1, barWidth, 1)];
-    border2.backgroundColor = [UIColor colorWithRed:191/255. green:191/255. blue:191/255. alpha:1.];
-    border2.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [v addSubview:border2];
-    
     int buttonHeight = 60;
-    int leftMargin = 3;
     int topMargin = 1;
+
+    KOKeyboardRow *v;
+    
+    if (NO) { // pre iOS 7
+        v = [[KOKeyboardRow alloc] initWithFrame:CGRectMake(0, 0, barWidth, barHeight)];
+        v.backgroundColor = [UIColor colorWithRed:156/255. green:155/255. blue:166/255. alpha:1.];
+        v.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        v.textView = t;
+        
+        UIView *border1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barWidth, 1)];
+        border1.backgroundColor = [UIColor colorWithRed:51/255. green:51/255. blue:51/255. alpha:1.];
+        border1.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [v addSubview:border1];
+        
+        UIView *border2 = [[UIView alloc] initWithFrame:CGRectMake(0, 1, barWidth, 1)];
+        border2.backgroundColor = [UIColor colorWithRed:191/255. green:191/255. blue:191/255. alpha:1.];
+        border2.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [v addSubview:border2];
+    }
+    else { // iOS 7
+        barHeight = 63;
+        buttonHeight = 57;
+        topMargin = 2;
+
+        v = [[KOKeyboardRow alloc] initWithFrame:CGRectMake(0, 0, barWidth, barHeight)];
+        v.backgroundColor = [CreateButton backgroundColorForType:UIKeyboardAppearanceLight];
+        v.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        v.textView = t;
+    }
+    
+    int leftMargin = 3;
     int buttonSpacing = 6;
     int buttonCount = 11;
     int buttonWidth = (barWidth - 2 * leftMargin - (buttonCount - 1) * buttonSpacing) / buttonCount;
     leftMargin = (barWidth - buttonWidth * buttonCount - buttonSpacing * (buttonCount - 1)) / 2;
-    
-    NSString *keys = @"TTTTT()\"[]{}'<>\\/$´`~^|€£◉◉◉◉◉-+=%*!?#@&_:;,.1203467589";
     
     for (int i = 0; i < buttonCount; i++) {
         KOSwipeButton *b = [[KOSwipeButton alloc] initWithFrame:CGRectMake(leftMargin + i * (buttonSpacing + buttonWidth), topMargin + (barHeight - buttonHeight) / 2, buttonWidth, buttonHeight)];

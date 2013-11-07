@@ -34,6 +34,8 @@
 
 #import "KOSwipeButton.h"
 #import "KOKeyboardRow.h"
+#import "CreateButton.h"
+
 
 @interface KOSwipeButton ()
 
@@ -66,10 +68,22 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
+    BOOL isIOS7 = YES;
     self = [super initWithFrame:frame];
     
-    UIImage *bgImg1 = [[UIImage imageNamed:@"key.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)];
-    UIImage *bgImg2 = [[UIImage imageNamed:@"key-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)];
+    UIImage *bgImg1;
+    UIImage *bgImg2;
+
+    if (isIOS7) { // iOS 7
+        CreateButton* cb = [[CreateButton alloc] init];
+        
+        bgImg1 = [cb buttonImage:CGSizeMake(CGRectGetWidth(frame) - 4.0, CGRectGetHeight(frame) - 4.0) type:UIKeyboardAppearanceLight];
+        bgImg2 = [cb altButtonImage:CGSizeMake(CGRectGetWidth(frame) - 4.0, CGRectGetHeight(frame) - 4.0) type:UIKeyboardAppearanceLight];
+    }
+    else { // pre-iOS 7
+        bgImg1 = [[UIImage imageNamed:@"key.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)];
+        bgImg2 = [[UIImage imageNamed:@"key-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)];
+    }
     bgView = [[UIImageView alloc] initWithFrame:self.bounds];
     [bgView setImage:bgImg1];
     [bgView setHighlightedImage:bgImg2];
@@ -92,7 +106,7 @@
     l.text = @"1";
     l.font = f;
     [self addSubview:l];
-    [l setHighlightedTextColor:[UIColor blueColor]];
+    [l setHighlightedTextColor:isIOS7 ? [UIColor whiteColor] : [UIColor blueColor]];
     l.backgroundColor = [UIColor clearColor];
     [labels addObject:l];
     
@@ -102,7 +116,7 @@
     l.font = f;
     l.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [self addSubview:l];
-    [l setHighlightedTextColor:[UIColor blueColor]];
+    [l setHighlightedTextColor:isIOS7 ? [UIColor whiteColor] : [UIColor blueColor]];
     l.backgroundColor = [UIColor clearColor];
     [labels addObject:l];
     
@@ -112,7 +126,7 @@
     l.font = f;
     l.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self addSubview:l];
-    [l setHighlightedTextColor:[UIColor blueColor]];
+    [l setHighlightedTextColor:isIOS7 ? [UIColor whiteColor] : [UIColor blueColor]];
     l.backgroundColor = [UIColor clearColor];
     [labels addObject:l];
     
@@ -121,7 +135,7 @@
     l.text = @"4";
     l.font = f;
     [self addSubview:l];
-    [l setHighlightedTextColor:[UIColor blueColor]];
+    [l setHighlightedTextColor:isIOS7 ? [UIColor whiteColor] : [UIColor blueColor]];
     l.backgroundColor = [UIColor clearColor];
     [labels addObject:l];
     
@@ -131,7 +145,7 @@
     l.font = f;
     l.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [self addSubview:l];
-    [l setHighlightedTextColor:[UIColor blueColor]];
+    [l setHighlightedTextColor:isIOS7 ? [UIColor whiteColor] : [UIColor blueColor]];
     l.backgroundColor = [UIColor clearColor];
     [labels addObject:l];
     
