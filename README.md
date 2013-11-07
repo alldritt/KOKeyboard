@@ -1,12 +1,12 @@
-KOKeyboard – iOS keyboard extension
-===================================
+# KOKeyboard – iOS keyboard extension
 
 **KOKeyboard** is an iOS drop-in component that adds a new row of keys to the default on-screen keyboard. It consists of swipe buttons with all common symbols, punctuation and brackets, and a special **navigation key**. It was developed for [Kodiak PHP](http://www.becomekodiak.com/), an app which allows you to write and run PHP code directly on the iPad.
 
 <img src="http://i.imgur.com/N7nQY.png">
 
-Swipe buttons & Navigation key
--------------
+
+
+## Swipe buttons & Navigation key
 
 A swipe button has 5 symbols on it. If you simply tap it, it will produce the middle symbol. However if you swipe it (tap-and-drag) towards one of the corners, it will produce the symbol in that corner.
 
@@ -14,8 +14,7 @@ The navigation key (the middle one with a circle on it) allows you to navigate i
 
 To see the component in action, take a look at the video at [http://www.becomekodiak.com/](http://www.becomekodiak.com/) or try our app called [Kodiak PHP on the App Store](http://itunes.apple.com/us/app/kodiak-php/id542685332?ls=1&mt=8).
 
-Usage
------
+## Usage
 
 We included a demo project that shows how to use the component.
 
@@ -36,13 +35,19 @@ You will see the additional keyboard after the UITextView gets focus, if you wan
 
 And that's it!
 
-Copyright and license
----------------------
+## Mark Alldritt's Changes
+
+I have integrated [David Hoerl's CreateButton](https://github.com/dhoerl/CreateShadowedRoundRectButtonImage) iOS7 appearance code into KOKeyboard to make the keyboard accessory view match the look of the iOS7 keyboard.
+
+[David Hoerl](https://github.com/dhoerl) has done is own modifications to the KOKeyboard classes.  While he has added lots of good stuff, there seem to be lots of outstanding issues (e.g. his code does not handle device rotation well while the keyboard is visible).  I'll watch his work, and if it settles down, I'll probably drop my efforts and use his work.
+
+I have added `[KOKeyboardRow applyToTextView:yourTextView keys:@"your key string"]` to make it possible to customize the keyboard keys without having to alter the KOKeyboard source.
+
+## Copyright and license
 
 This product is free and open source and it is distributed under the MIT License. See the file `LICENSE` for the complete text of the license.
 
-Contact
--------
+## Contact
 
 http://www.becomekodiak.com/<br />
 http://www.twitter.com/becomekodiak/<br />
